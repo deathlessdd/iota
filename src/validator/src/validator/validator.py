@@ -63,7 +63,7 @@ class HealthServerMixin:
 class Validator(BaseNeuron, HealthServerMixin, BaseValidator):
     def __init__(self, wallet_name: str | None = None, wallet_hotkey: str | None = None, wallet: Wallet | None = None):
         super().__init__()
-        self.init_neuron(wallet_name=wallet_name, wallet_hotkey=wallet_hotkey, mock=common_settings.MOCK, wallet=wallet)
+        self.init_neuron(wallet_name=wallet_name, wallet_hotkey=wallet_hotkey, wallet=wallet)
 
         self.available: bool = True
         self.tracked_miner_hotkey: str | None = None  # hotkey
@@ -441,7 +441,7 @@ class Validator(BaseNeuron, HealthServerMixin, BaseValidator):
             # Fetch the burn factor from the orchestrator
             burn_factor = None
             try:
-                burn_factor = float(await ValidatorAPIClient.fetch_subnet_burn())
+                burn_factor = float(await ValidatorAPIClient.fetch_subnet_burn(hotkey=self.wallet.hotkey))
             except Exception as e:
                 logger.warning(f"Error fetching burn factor: {e}")
             if burn_factor is None:
