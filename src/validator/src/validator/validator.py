@@ -63,7 +63,7 @@ class HealthServerMixin:
 class Validator(BaseNeuron, HealthServerMixin, BaseValidator):
     def __init__(self, wallet_name: str | None = None, wallet_hotkey: str | None = None, wallet: Wallet | None = None):
         super().__init__()
-        self.init_neuron(wallet_name=wallet_name, wallet_hotkey=wallet_hotkey, mock=common_settings.MOCK, wallet=wallet)
+        self.init_neuron(wallet_name=wallet_name, wallet_hotkey=wallet_hotkey, wallet=wallet)
 
         self.available: bool = True
         self.tracked_miner_hotkey: str | None = None  # hotkey
